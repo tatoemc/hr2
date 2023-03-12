@@ -51,13 +51,12 @@ Route::resource('payrolls', 'PayrollController');
 Route::get('getSalaries', 'SalaryController@getSalaries')->name('getSalaries'); 
 Route::resource('demissions', 'DemissionController'); 
 
-                                                     
-
-
+      
 Route::group(['middleware' => ['auth']], function() {
-    
     Route::resource('roles','RoleController');
     Route::resource('users','UserController');
+	Route::get('/changePassword','UserController@showChangePasswordForm')->name('changePassword');
+    Route::post('/changePassword','UserController@changePassword')->name('changePassword');
 
 });
 

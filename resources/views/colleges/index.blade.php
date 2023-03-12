@@ -77,12 +77,12 @@
 @endif
 
 <!-- row opened -->
-<div class="row row-sm">
+<div class="row row-sm"> 
     <div class="col-xl-12">
         <div class="card">
             <div class="card-header pb-0">
                 <div class="col-sm-1 col-md-2">
-                    @can('اضافة كلية')
+                    @can('انشاء كلية')
                         <a class="modal-effect btn btn-lg btn-block btn-primary" data-effect="effect-scale"
                         data-toggle="modal" href="#add">أضافة </a>
                      @endcan

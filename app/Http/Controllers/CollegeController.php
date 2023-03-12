@@ -46,6 +46,8 @@ class CollegeController extends Controller
         return view ('colleges.edit',compact('college'));
     }
 
+   
+
     
     public function update(UpdateCollegeRequest $request, College $college)
     {

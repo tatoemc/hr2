@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -11,7 +12,6 @@ use App\Models\User;
 use App\Models\Degree;
 use App\Models\Specialty;
 use App\Models\Job;
-use DB;
 use Hash;
 
 class UserController extends Controller
@@ -167,8 +167,8 @@ class UserController extends Controller
                 // $input['password'] = Hash::make($input['password']);
                 // $user = User::create($input); 
                 // $user->assignRole($request->input('roles_name'));
-
-                session()->flash('user_add');
+ 
+                session()->flash('user_add'); 
                 return redirect('/users');
             }
     
@@ -226,4 +226,38 @@ class UserController extends Controller
         session()->flash('user_delete');
         return redirect('/users');
     }
-}
+
+    public function showChangePasswordForm(){
+        return view('auth.changepassword');
+      }
+      
+      public function changePassword(Request $request){
+      
+       
+        if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
+            // The passwords matches
+            return redirect()->back()->withErrors(['error' => 'كلمة المرور غير صحيحة']);
+        }
+      
+        if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
+            //Current password and new password are same
+            return redirect()->back()->withErrors(['error' => 'لايمكن ادخال نفس كلمة المرور القديمة']);
+        }
+      
+        $validatedData = $request->validate([
+            'current-password' => 'required',
+            'new-password' => 'required|string|min:6|confirmed',
+        ]);
+      
+        //Change Password
+        $user = Auth::user();
+        $user->password = bcrypt($request->get('new-password'));
+        $user->save();
+      
+        session()->flash('change-password');
+        return redirect()->back();
+      
+      }
+
+
+}// End of controller

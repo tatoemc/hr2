@@ -64,16 +64,7 @@
                                 <input class="form-control form-control-sm mg-b-20"
                                 data-parsley-class-handler="#lnWrapper" name="email" required="" type="email" value="{{ $user->email }}">
                             </div>
-                            <div class="parsley-input col-md-4 mg-t-20 mg-md-t-0" id="lnWrapper">
-                                <label class="form-label">نوع المستخدم</label>
-                            <select name="user_type" id="select-beast" class="form-control  nice-select  custom-select">
-                               
-                                <option value='user'{{ $user->user_type == 'user' ? 'selected' : ''}}> موظف </option>
-                                <option value='admin'{{ $user->user_type == 'admin' ? 'selected' : ''}}> مدير </option> 
-                                <option value='teacher'{{ $user->user_type == 'teacher' ? 'selected' : ''}}> عضوء هيئة تدريس </option>
-                                <option value='trainee'{{ $user->user_type == 'trainee' ? 'selected' : ''}}> متدرب </option> 
-                            </select>
-                            </div>
+                            
                         </div>
                         <div class="row mg-b-20">
                             <div class="col-lg-4">
